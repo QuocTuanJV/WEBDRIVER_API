@@ -19,7 +19,7 @@ public class Topic_02_Xpath {
 		System.setProperty("webdriver.chrome.driver", ".\\lib\\chromedriver.exe");
 		driver = new ChromeDriver();
 		
-		driver.get("https://www.google.com/");
+		driver.get("http://live.guru99.com/index.php");
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(60,TimeUnit.SECONDS );
 		
@@ -28,7 +28,7 @@ public class Topic_02_Xpath {
 	@Test
 	public void TC_01_CheckTitle() {
 		
-		driver.findElement(By.xpath("//input[@class='gLFyf gsfi']")).sendKeys("google");
+		driver.findElement(By.xpath("//div[@class='footer']//a[@title='My Account']")).click();
 	}
 
 	@AfterClass
