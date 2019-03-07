@@ -27,36 +27,70 @@ public class Topic_02_Xpath {
 	}
 
 	@Test
-	public void TC_01_CheckUrlAndTitle() {	
+	public void TC_01_CheckUrlAndTitle() {
+
+		// Step 01: Open link URL
+		driver.get("http://live.guru99.com");
+
 		String homePageTitle = driver.getTitle();
-		
-		//Step 02: check title Home page
+
+		// Step 02: check title Home page
 		Assert.assertEquals(homePageTitle, "Home page");
 //		Assert.assertTrue(homePageTitle == "Home page");
 //		Assert.assertTrue(homePageTitle.equals("Home page"));
-		
-		//Step 03: Click link "My Account"
+
+		// Step 03: Click link "My Account"
 		driver.findElement(By.xpath("//div[@class='footer']//a[@title='My Account']")).click();
-		
-		//Step 04: Create a Account
+
+		// Step 04: Create a Account
 		driver.findElement(By.xpath("//span[text() = 'Create an Account']")).click();
-		
-		//Step 05: Back to login page
+
+		// Step 05: Back to login page
 		driver.navigate().back();
-		
-		//Step 06: Check url page login is: http://live.guru99.com/index.php/customer/account/login/
+
+		// Step 06: Check url page login is:
+		// http://live.guru99.com/index.php/customer/account/login/
 		String loginUrl = driver.getCurrentUrl();
-		Assert.assertEquals(loginUrl,"http://live.guru99.com/index.php/customer/account/login/");
-		
-		//Step 07: Forward to create account
+		Assert.assertEquals(loginUrl, "http://live.guru99.com/index.php/customer/account/login/");
+
+		// Step 07: Forward to create account
 		driver.navigate().forward();
-		
-		//Step 08: Check url page create account: http://live.guru99.com/index.php/customer/account/create/
+
+		// Step 08: Check url page create account:
+		// http://live.guru99.com/index.php/customer/account/create/
 		String createAnAccountUrl = driver.getCurrentUrl();
 		Assert.assertEquals(createAnAccountUrl, "http://live.guru99.com/index.php/customer/account/create/");
+
+	}
+
+	@Test
+	public void TC_02_EmailAndPasswordEmpty() {
+		// Step 01: Go to link URL
+		driver.get("http://live.guru99.com");
+
+		// driver.get("https://www.google.com/");
+
+		// Step 02: Click link "My Account"
+		driver.findElement(By.xpath("//div[@class ='footer']//a[@title='My Account']")).click();
+//		driver.findElement(By.xpath("//div[@class ='footer']//a[contains(text(),'My Account')]")).click();
+//		driver.findElement(By.xpath("//div[@class ='footer']//a[text()='My Account']")).click();
 		
+		//Step 03: Input blank for UserName/Password
+		driver.findElement(By.xpath("//input[@id='email']")).sendKeys("");
+		driver.findElement(By.xpath("//input[@id='pass']")).sendKeys("");
 		
+		//Step 04: Click button Login //div[@class='buttons-set']//span[contains(text(),'Login')]
+		driver.findElement(By.xpath("//div[@class='buttons-set']//span[contains(text(),'Login')]")).click();
 		
+		//Step 05: Verify text fill 
+		
+		String emailErrorMessage = driver.findElement(By.xpath(" //div[@id='advice-required-entry-email']")).getText();
+		String passErrorMessage = driver.findElement(By.xpath("//div[@id='advice-required-entry-pass']")).getText();
+		
+		System.out.println("TWO VERIYFOUND IS:  "+ emailErrorMessage + " " + passErrorMessage);
+		
+		Assert.assertEquals(emailErrorMessage, "This is a required field.");
+		Assert.assertEquals(passErrorMessage, "This is a required field.");
 	}
 
 	@AfterClass
