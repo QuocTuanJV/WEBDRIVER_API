@@ -108,61 +108,58 @@ public class Topic_02_Xpath {
 		// Step 03: Click CREATE AN ACCOUNT button
 		driver.findElement(By.xpath("//span[contains(text(), 'Create an Account')]")).click();
 //		driver.findElement(By.xpath("//span[text() = 'Create an Account']")).click();
-		
+
 		// Step 04: Fill data register
-		//First Name
+		// First Name
 		driver.findElement(By.xpath("//input[@id='firstname']")).sendKeys("Luong");
-		
-		//Last Name
+
+		// Last Name
 		driver.findElement(By.xpath("//input[@id = 'lastname']")).sendKeys("Tuan");
-		
-		//RANDOM_EMAIL
+
+		// RANDOM_EMAIL
 		Random rd = new Random();
 		int number = rd.nextInt(1000);
-		String randomEmail = "TUAN"+ Integer.toString(number) + "@gmail.com";
-		
-		//Email 
+		String randomEmail = "TUAN" + Integer.toString(number) + "@gmail.com";
+
+		// Email
 		driver.findElement(By.xpath("//input[@id='email_address']")).sendKeys(randomEmail);
-		
-		System.out.println("EMAIL IS: " + randomEmail );
-		
-		//Password
+
+		System.out.println("EMAIL IS: " + randomEmail);
+
+		// Password
 		driver.findElement(By.xpath("//input[@id = 'password']")).sendKeys("123456");
-		
-		//Confirm Password
+
+		// Confirm Password
 		driver.findElement(By.xpath("//input[@id ='confirmation']")).sendKeys("123456");
-		
-		
-		//Step 05: click button
+
+		// Step 05: click button
 		driver.findElement(By.xpath("//span[contains(text(),'Register')]")).click();
-		
-		//Step 5_01: Verify Message register success: Thank you for registering with Main Website Store
-		
-		String registerSuccessMessage = driver.findElement(By.xpath("//span[contains(text(),'Thank you for registering with Main Website Store.')]")).getText();
-		
-		Assert.assertEquals(registerSuccessMessage,"Thank you for registering with Main Website Store.");
-		
+
+		// Step 5_01: Verify Message register success: Thank you for registering with
+		// Main Website Store
+
+		String registerSuccessMessage = driver
+				.findElement(By.xpath("//span[contains(text(),'Thank you for registering with Main Website Store.')]"))
+				.getText();
+
+		Assert.assertEquals(registerSuccessMessage, "Thank you for registering with Main Website Store.");
+
 		System.out.println("--------Register success--------");
-		
-		//Step 06: Logout 
-		
+
+		// Step 06: Logout
+
 		driver.findElement(By.xpath("//div[@class='account-cart-wrapper']//span[text()='Account']")).click();
-		
+
 		driver.findElement(By.xpath("//a[@title='Log Out']")).click();
-		
+
 		System.out.println("--------Logout success--------");
-		
-		//Step 06_01: navigate homepage success
-		String homepageSuccess = driver.findElement(By.xpath("//img[@alt= 'Magento Commerce' and @class = 'small']")).getText();
-		
-		Assert.assertEquals(homepageSuccess, "Magento Commerce");
-		
-		System.out.println("HOME PAGE IS: "+ homepageSuccess);
-		
-		
-		
-		
-		
+
+		// Step 06_01: navigate homepage success
+		boolean homepageSuccess = driver.findElement(By.xpath("//h2[contains(text(),'This is demo site for ')]"))
+				.isDisplayed();
+		Assert.assertTrue(homepageSuccess);
+
+		System.out.println("-----HOME PAGE IS BACK------");
 
 	}
 
