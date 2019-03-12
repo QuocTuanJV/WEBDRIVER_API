@@ -5,8 +5,10 @@ import org.testng.annotations.BeforeClass;
 
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 
 public class Topic_03_Webbrowser_WebElement {
@@ -18,13 +20,25 @@ public class Topic_03_Webbrowser_WebElement {
 		System.setProperty("webdriver.chrome.driver", ".\\lib\\chromedriver.exe");
 		driver = new ChromeDriver();
 
-		driver.get("http://live.guru99.com");
+		driver.get("https://daominhdam.github.io/basic-form/index.html");
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 
 	@Test
-	public void f() {
+	public void TC_01_CheckDisplayElement(){
+		//Step 01: Access Page
+		driver.get("https://daominhdam.github.io/basic-form/index.html");
+		
+		//Step 02: Check display Element
+		boolean isDisplayEmail = driver.findElement(By.xpath("//input[@type = 'email']")).isDisplayed();
+		Assert.assertTrue(isDisplayEmail);
+		
+		boolean isDisplayAge = driver.findElement(By.xpath("//input[@id = 'under_18']")).isDisplayed();
+		Assert.assertTrue(isDisplayAge);
+		
+		
+		
 	}
 
 	@AfterClass
