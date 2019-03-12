@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -14,6 +15,9 @@ import org.testng.annotations.AfterClass;
 public class Topic_03_Webbrowser_WebElement {
 
 	WebDriver driver;
+	
+	By emailByTextbox = By.xpath("//input[@type = 'email']");
+	By radioByButton = By.xpath("//input[@id = 'under_18']");
 
 	@BeforeClass
 	public void beforeClass() {
@@ -26,16 +30,33 @@ public class Topic_03_Webbrowser_WebElement {
 	}
 
 	@Test
-	public void TC_01_CheckDisplayElement(){
+	public void TC_01_CheckDisplayElement(){    
 		//Step 01: Access Page
 		driver.get("https://daominhdam.github.io/basic-form/index.html");
 		
 		//Step 02: Check display Element
-		boolean isDisplayEmail = driver.findElement(By.xpath("//input[@type = 'email']")).isDisplayed();
-		Assert.assertTrue(isDisplayEmail);
 		
-		boolean isDisplayAge = driver.findElement(By.xpath("//input[@id = 'under_18']")).isDisplayed();
-		Assert.assertTrue(isDisplayAge);
+		if(driver.findElement(emailByTextbox).isDisplayed()) {
+			System.out.println("ELEMENT "+ emailByTextbox + " is display");
+		}
+		else {
+			System.out.println("ELEMENT "+ emailByTextbox + " is not display");
+		}
+		
+		
+		if(driver.findElement(radioByButton).isDisplayed()) {
+			System.out.println("ELEMENT "+ radioByButton + " is display");
+		}
+		else {
+			System.out.println("ELEMENT "+ radioByButton + " is not display");
+		}
+			
+		
+//		boolean isDisplayEmail = driver.findElement(By.xpath("//input[@type = 'email']")).isEnabled();
+//		Assert.assertTrue(isDisplayEmail);
+//		
+//		boolean isDisplayAge = driver.findElement(By.xpath("//input[@id = 'under_18']")).isEnabled();
+//		Assert.assertTrue(isDisplayAge);
 		
 		
 		
@@ -44,5 +65,20 @@ public class Topic_03_Webbrowser_WebElement {
 	@AfterClass
 	public void afterClass() {
 	}
+	
+//	public boolean isElementDisplay(By by) {
+//		WebElement wb = driver.findElement(by);
+//		if(wb.isDisplayed()) {
+//			System.out.println("ELEMENT " + by + " IS DISPLAY");
+//			return true;
+//		}
+//		else
+//		{
+//			System.out.println("ELEMENT " + by + " IS NOT DISPLAY");
+//			return false;
+//			
+//		}
+//		
+//	}
 
 }
