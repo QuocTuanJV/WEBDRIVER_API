@@ -55,6 +55,8 @@ public class Topic_04_Textbox_TextArea_DropDown {
 	By labelPinTextbox = By.xpath("//td[contains(text(),'Pin')]");
 	By labelMobileNumberTextbox = By.xpath("//td[contains(text(),'Mobile No.')]");
 	By labelEmailTextbox = By.xpath("//td[contains(text(),'Email')]");
+	
+	
 
 	@BeforeClass
 	public void beforeClass() {
@@ -143,10 +145,10 @@ public class Topic_04_Textbox_TextArea_DropDown {
 		Assert.assertTrue(isTheSame("female", outGenderRadioButton, labelGenderRadioButton));// female
 		
 		//Birth day
-		Assert.assertTrue(isTheSame("1992-01-08", outDateOfbirth, labelDateOfbirth));
+		Assert.assertTrue(isTheSame("1992-08-01", outDateOfbirth, labelDateOfbirth));
 		
 		//Address
-		Assert.assertTrue(isTheSame("123 Adress", outAddressTextArea, labelAddressTextArea));
+		Assert.assertTrue(isTheSame("123 Address", outAddressTextArea, labelAddressTextArea));
 		
 		//City
 		Assert.assertTrue(isTheSame("Ho Chi Minh", outCityTextbox, labelCityTextbox));
@@ -162,6 +164,37 @@ public class Topic_04_Textbox_TextArea_DropDown {
 		
 		//Email
 		Assert.assertTrue(isTheSame(emailRandom, outEmailTextbox, labelEmailTextbox));
+		
+		System.out.println("--------STEP 07---------");
+		
+		//Step 07: Select menu Edit Customer > fill Customer ID > Submit
+		//Click Edit Customer
+		driver.findElement(By.xpath("//a[contains(text(),'Edit Customer')]")).click();
+		
+		//Fill Customer ID
+		driver.findElement(By.xpath("//input[@name ='cusid']")).sendKeys(idCustomer);
+		
+		//Click Submit
+		driver.findElement(By.xpath("//input[@name ='AccSubmit']")).click();
+		
+		System.out.println("--------STEP 08---------");
+		
+		//Step 08: Verify Customer Name and Address on Create New Customer
+		String customerNameEdit = driver.findElement(By.xpath("//td[contains(text(),'Customer Name')]/following-sibling::td//input")).getAttribute("value");
+		String addressEdit = driver.findElement(outAddressTextArea).getText();
+		
+		Assert.assertEquals("Selenium Online", customerNameEdit);
+		System.out.println("--------CUSTOMER NAME IS VERIFY---------");
+		Assert.assertEquals("123 Address", addressEdit);
+		System.out.println("--------ADDRESS IS VERIFY---------");
+		
+		//Step 09: 
+		
+		
+		
+		
+		
+		
 
 		
 
