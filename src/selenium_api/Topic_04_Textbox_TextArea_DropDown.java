@@ -30,7 +30,7 @@ public class Topic_04_Textbox_TextArea_DropDown {
 	By mobileNumberTextbox = By.xpath("//input[@name='telephoneno']");
 	By emailTextbox = By.xpath("//input[@name='emailid']");
 	By passwordTexbox = By.xpath("//input[@name='password']");
-	By submitButton = By.xpath("//input[@value='Submit and @name='sub'']");
+	By submitButton = By.xpath("//input[@value='Submit' and @name='sub']");
 
 	// XPATH Element output
 
@@ -143,7 +143,22 @@ public class Topic_04_Textbox_TextArea_DropDown {
 		Assert.assertTrue(isTheSame("female", outGenderRadioButton, labelGenderRadioButton));// female
 		
 		//Birth day
-		Assert.assertTrue(condition);
+		Assert.assertTrue(isTheSame("1992-01-08", outDateOfbirth, labelDateOfbirth));
+		
+		//Address
+		Assert.assertTrue(isTheSame("123 Adress", outAddressTextArea, labelAddressTextArea));
+		
+		//City
+		Assert.assertTrue(isTheSame("Ho Chi Minh", outCityTextbox, labelCityTextbox));
+		
+		//State
+		Assert.assertTrue(isTheSame("Thu Duc", outStateTextbox, labelStateTextbox));
+		
+		//Pin
+		Assert.assertTrue(isTheSame("123456", outPinTextbox, labelPinTextbox));
+		
+		//Mobile No
+		Assert.assertTrue(isTheSame("0123456987", outMobileNumberTextbox, labelMobileNumberTextbox));
 		
 		//Email
 		Assert.assertTrue(isTheSame(emailRandom, outEmailTextbox, labelEmailTextbox));
