@@ -55,8 +55,6 @@ public class Topic_04_Textbox_TextArea_DropDown {
 	By labelPinTextbox = By.xpath("//td[contains(text(),'Pin')]");
 	By labelMobileNumberTextbox = By.xpath("//td[contains(text(),'Mobile No.')]");
 	By labelEmailTextbox = By.xpath("//td[contains(text(),'Email')]");
-	
-	
 
 	@BeforeClass
 	public void beforeClass() {
@@ -121,8 +119,8 @@ public class Topic_04_Textbox_TextArea_DropDown {
 		driver.findElement(mobileNumberTextbox).sendKeys("0123456987");
 
 		// Email
-		
-		String emailRandom = "TUAN"+ randomID() + "@gmail.com";
+
+		String emailRandom = "TUAN" + randomID() + "@gmail.com";
 		driver.findElement(emailTextbox).sendKeys(emailRandom);
 
 		// Password
@@ -137,92 +135,113 @@ public class Topic_04_Textbox_TextArea_DropDown {
 		System.out.println("----------------------------------");
 		System.out.println("---CUSTOMER ID IS: " + idCustomer);
 		System.out.println("----------------------------------");
-		
-		// Step 06: Verify information 
+
+		// Step 06: Verify information
 		Assert.assertTrue(isTheSame("Selenium Online", outNameCustomerTextbox, labelNameCustomerTextbox));
-		
-		//Gender
+
+		// Gender
 		Assert.assertTrue(isTheSame("female", outGenderRadioButton, labelGenderRadioButton));// female
-		
-		//Birth day
-		Assert.assertTrue(isTheSame("1992-01-08", outDateOfbirth, labelDateOfbirth));
-		
-		//Address
+
+		// Birth day
+		Assert.assertTrue(isTheSame("1992-08-01", outDateOfbirth, labelDateOfbirth));
+
+		// Address
 		Assert.assertTrue(isTheSame("123 Address", outAddressTextArea, labelAddressTextArea));
-		
-		//City
+
+		// City
 		Assert.assertTrue(isTheSame("Ho Chi Minh", outCityTextbox, labelCityTextbox));
-		
-		//State
+
+		// State
 		Assert.assertTrue(isTheSame("Thu Duc", outStateTextbox, labelStateTextbox));
-		
-		//Pin
+
+		// Pin
 		Assert.assertTrue(isTheSame("123456", outPinTextbox, labelPinTextbox));
-		
-		//Mobile No
+
+		// Mobile No
 		Assert.assertTrue(isTheSame("0123456987", outMobileNumberTextbox, labelMobileNumberTextbox));
-		
-		//Email
+
+		// Email
 		Assert.assertTrue(isTheSame(emailRandom, outEmailTextbox, labelEmailTextbox));
-		
+
 		System.out.println("--------STEP 07---------");
-		
-		//Step 07: Select menu Edit Customer > fill Customer ID > Submit
-		//Click Edit Customer
+
+		// Step 07: Select menu Edit Customer > fill Customer ID > Submit
+		// Click Edit Customer
 		driver.findElement(By.xpath("//a[contains(text(),'Edit Customer')]")).click();
-		
-		//Fill Customer ID
+
+		// Fill Customer ID
 		driver.findElement(By.xpath("//input[@name ='cusid']")).sendKeys(idCustomer);
-		
-		//Click Submit
+
+		// Click Submit
 		driver.findElement(By.xpath("//input[@name ='AccSubmit']")).click();
-		
+
 		System.out.println("--------STEP 08---------");
-		
-		//Step 08: Verify Customer Name and Address on Create New Customer
-		String customerNameEdit = driver.findElement(By.xpath("//td[contains(text(),'Customer Name')]/following-sibling::td//input")).getAttribute("value");
+
+		// Step 08: Verify Customer Name and Address on Create New Customer
+		String customerNameEdit = driver
+				.findElement(By.xpath("//td[contains(text(),'Customer Name')]/following-sibling::td//input"))
+				.getAttribute("value");
 		String addressEdit = driver.findElement(outAddressTextArea).getText();
-		
+
 		Assert.assertEquals("Selenium Online", customerNameEdit);
 		System.out.println("--------CUSTOMER NAME IS VERIFY---------");
 		Assert.assertEquals("123 Address", addressEdit);
 		System.out.println("--------ADDRESS IS VERIFY---------");
-		
-		//Step 09: Fill new value can be edited
+
+		// Step 09: Fill new value can be edited
 		// Try get Text
 //		System.out.println("Gia tri get thu la: "+ driver.findElement(By.xpath("//td[contains(text(),'Address')]/following-sibling::td/textarea")).getText());
-		
-		//Try clear Text
-		driver.findElement(By.xpath("//td[contains(text(),'Address')]/following-sibling::td/textarea")).clear();
-		//Try send key after clear text
-		driver.findElement(By.xpath("//td[contains(text(),'Address')]/following-sibling::td/textarea")).sendKeys("Edit 123 Address");
-		
-		//City
-		driver.findElement(By.xpath("//td[contains(text(),'City')]/following-sibling::td/input")).click();
-		driver.findElement(By.xpath("//td[contains(text(),'City')]/following-sibling::td/input")).clear();
-		
-		driver.findElement(By.xpath("//td[contains(text(),'City')]/following-sibling::td/input")).sendKeys("Edit Ho Chi Minh");
-		
-		
-		
 
+		// Try clear Text
+		driver.findElement(By.xpath("//td[contains(text(),'Address')]/following-sibling::td/textarea")).clear();
+		// Try send key after clear text
+		driver.findElement(By.xpath("//td[contains(text(),'Address')]/following-sibling::td/textarea"))
+				.sendKeys("Edit 123 Address");
+
+		// City
+		driver.findElement(By.xpath("//td[contains(text(),'City')]/following-sibling::td")).click();
+		driver.findElement(By.xpath("//td[contains(text(),'City')]/following-sibling::td/input")).clear();
+		driver.findElement(By.xpath("//td[contains(text(),'City')]/following-sibling::td/input"))
+				.sendKeys("Edit Ho Chi Minh");
+
+		// State
+		driver.findElement(By.xpath("//td[contains(text(),'State')]/following-sibling::td")).click();
+		driver.findElement(By.xpath("//td[contains(text(),'State')]/following-sibling::td/input")).clear();
+		driver.findElement(By.xpath("//td[contains(text(),'State')]/following-sibling::td/input"))
+				.sendKeys("Edit Thu Duc");
+
+		// PIN
+		driver.findElement(By.xpath("//td[contains(text(),'PIN')]/following-sibling::td")).click();
+		driver.findElement(By.xpath("//td[contains(text(),'PIN')]/following-sibling::td/input")).clear();
+		driver.findElement(By.xpath("//td[contains(text(),'PIN')]/following-sibling::td/input")).sendKeys("654321");
+
+		// Moblie Number
+		driver.findElement(By.xpath("//td[contains(text(),'Mobile Number')]/following-sibling::td")).click();
+		driver.findElement(By.xpath("//td[contains(text(),'Mobile Number')]/following-sibling::td/input")).clear();
+		driver.findElement(By.xpath("//td[contains(text(),'Mobile Number')]/following-sibling::td/input")).sendKeys("987543210");
+		
+		//Email
+		driver.findElement(By.xpath("//td[contains(text(),'E-mail')]/following-sibling::td")).click();
+		driver.findElement(By.xpath("//td[contains(text(),'E-mail')]/following-sibling::td/input")).clear();
+		driver.findElement(By.xpath("//td[contains(text(),'E-mail')]/following-sibling::td/input")).sendKeys("1"+emailRandom);
+		
+		
+		
 		
 
 	}
 
 	@AfterClass
 	public void afterClass() {
-		
+
 	}
 
 	public boolean isTheSame(String expected, By byOut, By byLabel) {
 
 		if (expected.equals(driver.findElement(byOut).getText())) {
 			System.out.println("INFOMATION " + getLabel(byLabel) + ": IS VERIFY");
-			return true;	
-		}
-		else
-		{
+			return true;
+		} else {
 			System.out.println("INFOMATION " + getLabel(byLabel) + ": IS NOT VERIFY");
 			return false;
 		}
@@ -231,15 +250,10 @@ public class Topic_04_Textbox_TextArea_DropDown {
 	public String getLabel(By byLabel) {
 		return driver.findElement(byLabel).getText();
 	}
-	
+
 	public int randomID() {
 		Random rd = new Random();
 		return rd.nextInt(1000);
 	}
-	
-	public void clearAndSend() {
-		
-	}
-	
 
 }
