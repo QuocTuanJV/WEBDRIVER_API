@@ -145,7 +145,7 @@ public class Topic_04_Textbox_TextArea_DropDown {
 		Assert.assertTrue(isTheSame("female", outGenderRadioButton, labelGenderRadioButton));// female
 		
 		//Birth day
-		Assert.assertTrue(isTheSame("1992-08-01", outDateOfbirth, labelDateOfbirth));
+		Assert.assertTrue(isTheSame("1992-01-08", outDateOfbirth, labelDateOfbirth));
 		
 		//Address
 		Assert.assertTrue(isTheSame("123 Address", outAddressTextArea, labelAddressTextArea));
@@ -188,10 +188,20 @@ public class Topic_04_Textbox_TextArea_DropDown {
 		Assert.assertEquals("123 Address", addressEdit);
 		System.out.println("--------ADDRESS IS VERIFY---------");
 		
-		//Step 09: 
+		//Step 09: Fill new value can be edited
+		// Try get Text
+//		System.out.println("Gia tri get thu la: "+ driver.findElement(By.xpath("//td[contains(text(),'Address')]/following-sibling::td/textarea")).getText());
 		
+		//Try clear Text
+		driver.findElement(By.xpath("//td[contains(text(),'Address')]/following-sibling::td/textarea")).clear();
+		//Try send key after clear text
+		driver.findElement(By.xpath("//td[contains(text(),'Address')]/following-sibling::td/textarea")).sendKeys("Edit 123 Address");
 		
+		//City
+		driver.findElement(By.xpath("//td[contains(text(),'City')]/following-sibling::td/input")).click();
+		driver.findElement(By.xpath("//td[contains(text(),'City')]/following-sibling::td/input")).clear();
 		
+		driver.findElement(By.xpath("//td[contains(text(),'City')]/following-sibling::td/input")).sendKeys("Edit Ho Chi Minh");
 		
 		
 		
@@ -226,5 +236,10 @@ public class Topic_04_Textbox_TextArea_DropDown {
 		Random rd = new Random();
 		return rd.nextInt(1000);
 	}
+	
+	public void clearAndSend() {
+		
+	}
+	
 
 }
