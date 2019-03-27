@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.AfterClass;
 
 public class Topic_05_Handle_Dropdown_List {
@@ -25,7 +26,20 @@ public class Topic_05_Handle_Dropdown_List {
 	}
 
 	@Test
-	public void f() {
+	public void TC_01_Handle_HTML_DropDownlist() {
+		//Go to  Link
+		//Step 01:
+		driver.get("https://daominhdam.github.io/basic-form/index.html");
+		
+		//Step 02: Check drop down Job Role 01 not support attribute multi - select
+		
+		Select  select = new Select("");
+		
+		
+		
+		
+		
+		
 	}
 
 	@AfterClass
