@@ -30,7 +30,7 @@ public class Topic_04_Textbox_TextArea_DropDown {
 	By mobileNumberTextbox = By.xpath("//input[@name='telephoneno']");
 	By emailTextbox = By.xpath("//input[@name='emailid']");
 	By passwordTexbox = By.xpath("//input[@name='password']");
-	By submitButton = By.xpath("//input[@value='Submit' and @name='sub']");
+	By submitButton = By.xpath("//input[@value='Submit' and @name='sub']");// button submit
 
 	// XPATH Element output
 
@@ -143,7 +143,7 @@ public class Topic_04_Textbox_TextArea_DropDown {
 		Assert.assertTrue(isTheSame("female", outGenderRadioButton, labelGenderRadioButton));// female
 
 		// Birth day
-		Assert.assertTrue(isTheSame("1992-08-01", outDateOfbirth, labelDateOfbirth));
+		Assert.assertTrue(isTheSame("1992-01-08", outDateOfbirth, labelDateOfbirth));
 
 		// Address
 		Assert.assertTrue(isTheSame("123 Address", outAddressTextArea, labelAddressTextArea));
@@ -198,33 +198,56 @@ public class Topic_04_Textbox_TextArea_DropDown {
 		driver.findElement(By.xpath("//td[contains(text(),'Address')]/following-sibling::td/textarea"))
 				.sendKeys("Edit 123 Address");
 
-		// City
+		//Edit City
 		driver.findElement(By.xpath("//td[contains(text(),'City')]/following-sibling::td")).click();
 		driver.findElement(By.xpath("//td[contains(text(),'City')]/following-sibling::td/input")).clear();
 		driver.findElement(By.xpath("//td[contains(text(),'City')]/following-sibling::td/input"))
 				.sendKeys("Edit Ho Chi Minh");
 
-		// State
+		//Edit State
 		driver.findElement(By.xpath("//td[contains(text(),'State')]/following-sibling::td")).click();
 		driver.findElement(By.xpath("//td[contains(text(),'State')]/following-sibling::td/input")).clear();
 		driver.findElement(By.xpath("//td[contains(text(),'State')]/following-sibling::td/input"))
 				.sendKeys("Edit Thu Duc");
 
-		// PIN
+		//Edit PIN
 		driver.findElement(By.xpath("//td[contains(text(),'PIN')]/following-sibling::td")).click();
 		driver.findElement(By.xpath("//td[contains(text(),'PIN')]/following-sibling::td/input")).clear();
 		driver.findElement(By.xpath("//td[contains(text(),'PIN')]/following-sibling::td/input")).sendKeys("654321");
 
-		// Moblie Number
+		//Edit Mobile Number
 		driver.findElement(By.xpath("//td[contains(text(),'Mobile Number')]/following-sibling::td")).click();
 		driver.findElement(By.xpath("//td[contains(text(),'Mobile Number')]/following-sibling::td/input")).clear();
 		driver.findElement(By.xpath("//td[contains(text(),'Mobile Number')]/following-sibling::td/input")).sendKeys("987543210");
 		
-		//Email
+		//Edit Email
 		driver.findElement(By.xpath("//td[contains(text(),'E-mail')]/following-sibling::td")).click();
 		driver.findElement(By.xpath("//td[contains(text(),'E-mail')]/following-sibling::td/input")).clear();
 		driver.findElement(By.xpath("//td[contains(text(),'E-mail')]/following-sibling::td/input")).sendKeys("1"+emailRandom);
 		
+		//Click button submit after edit information
+		driver.findElement(submitButton).click();
+		
+		//Step 10: Verify information after edit
+		System.out.println("-----------VERIFY INFORMATION AFTER EDIT-----------");
+		
+		//VERIFY ADDRESS
+		Assert.assertTrue(isTheSame("Edit 123 Address", outAddressTextArea, labelAddressTextArea));
+		
+		//VERIFY CITY
+		Assert.assertTrue(isTheSame("Edit Ho Chi Minh", outCityTextbox, labelCityTextbox));
+		
+		//VERIFY STATE
+		Assert.assertTrue(isTheSame("Edit Thu Duc", outStateTextbox, labelStateTextbox));
+		
+		//VERIFY PIN
+		Assert.assertTrue(isTheSame("654321", outPinTextbox, labelPinTextbox));
+		
+		//VERIFY MOBILE NO
+		Assert.assertTrue(isTheSame("987543210", outMobileNumberTextbox, labelMobileNumberTextbox));
+		
+		//VERIFY EMAIL
+		Assert.assertTrue(isTheSame("1"+ emailRandom, outEmailTextbox, labelEmailTextbox));
 		
 		
 		
