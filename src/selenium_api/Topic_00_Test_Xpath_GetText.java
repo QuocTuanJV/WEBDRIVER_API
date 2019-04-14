@@ -17,7 +17,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 
-public class Topic_00_Test_Xpath {
+public class Topic_00_Test_Xpath_GetText {
 	WebDriver driver;
 	WebDriverWait waitExplicit;
 	
@@ -52,13 +52,10 @@ public class Topic_00_Test_Xpath {
 //		System.out.println("ITEM ORANGE IS SELECTED");
 		
 		driver.get("https://material.angular.io/components/select/examples");
-		
-		handleCustomDropDown("//mat-select[@role ='listbox' and @id='mat-select-5']", "//mat-option/span", "Washington");
-		
-		Assert.assertTrue(driver.findElement(By.xpath("//mat-select[@role ='listbox' and @id='mat-select-5']//span[contains(text(),'Washington')]")).isDisplayed());
-		
-		System.out.println("WASHINGTON IS CHOSED");
 
+	WebElement wb = driver.findElement(By.xpath("//mat-select[@role ='listbox' and @id='mat-select-5']"));
+	javaExecutor.executeScript("arguments[0].scrollIntoView(true);", wb);
+	wb.click();
 		
 	}
 	

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -19,6 +20,8 @@ import org.testng.annotations.AfterClass;
 public class Topic_05_Handle_Dropdown_List {
 	WebDriver driver;
 	WebDriverWait waitExplicit;
+	
+	JavascriptExecutor javaExecutor;
 
 	@BeforeClass
 	public void beforeClass() {
@@ -26,6 +29,8 @@ public class Topic_05_Handle_Dropdown_List {
 		driver = new ChromeDriver();
 		
 		waitExplicit = new WebDriverWait(driver, 60);
+		
+		javaExecutor = (JavascriptExecutor) driver;
 
 //		driver = new FirefoxDriver();
 
@@ -36,6 +41,7 @@ public class Topic_05_Handle_Dropdown_List {
 
 	@Test
 	public void TC_01_Handle_HTML_DropDownlist() {
+	
 		//Go to  Link
 		//Step 01:
 		driver.get("https://daominhdam.github.io/basic-form/index.html");
@@ -89,6 +95,8 @@ public class Topic_05_Handle_Dropdown_List {
 	
 	@Test
 	public void TC_02_Handle_Custom_Dropdown_List() throws InterruptedException {
+		
+		//Jquery
 		//STEP 01: 
 		driver.get("http://jqueryui.com/resources/demos/selectmenu/default.html");
 		
@@ -111,6 +119,24 @@ public class Topic_05_Handle_Dropdown_List {
 		
 		Thread.sleep(200);
 		
+		//Kendo UI
+		/* 
+		 DO AFTER
+		 */
+		
+		//Angular 2
+		
+		driver.get("https://material.angular.io/components/select/examples");
+		selectItemFromCustomDropDownList("//mat-select[@role ='listbox' and @id='mat-select-5']", "//mat-option/span", "Washington");
+		Assert.assertTrue(driver.findElement(By.xpath("//mat-select[@role ='listbox' and @id='mat-select-5']//span[contains(text(),'Washington')]")).isDisplayed());
+		
+		//Vue JS 2
+		driver.get("https://mikerodham.github.io/vue-dropdowns/");
+		
+		
+		
+		
+		
 		
 		
 		
@@ -118,6 +144,7 @@ public class Topic_05_Handle_Dropdown_List {
 	
 	public void selectItemFromCustomDropDownList(String parentXpath, String childXpath, String expected) {
 		WebElement element = driver.findElement(By.xpath(parentXpath));
+		javaExecutor.executeScript("arguments[0].scrollIntoView(true);", element);
 		element.click();
 		
 		System.out.println("CLICK SUCCESSFULLY!!!");
@@ -132,6 +159,7 @@ public class Topic_05_Handle_Dropdown_List {
 //			System.out.println("ITEM IS: " + itemSelect);
 			if(itemSelect.equals(expected))
 			{
+				javaExecutor.executeScript("arguments[0].scrollIntoView(true);", child);
 				child.click();
 				break;
 			}
