@@ -33,20 +33,62 @@ public class Topic_05_Button_Radio_Checkbox_Alert {
 		javaExecutor = (JavascriptExecutor) driver;
 
 		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
 	}
 
 	@Test
-	public void f() {
-		// get page
-
+//	public void TC_01_HandleButton() {
+//		// get page
+//		driver.get("http://live.guru99.com/");
+//		
+//		//Click My Account on footer
+//		driver.findElement(By.xpath("//div[@class='footer']//a[text()='My Account']")).click();
+//		
+//		//Click on Create an Account use JavascriptExecutor
+//		
+//		WebElement wb = driver.findElement(By.xpath("//span[contains(text(),'Create an Account')]"));
+//		clickElementByJavascript(driver, wb);
+//		
+//		//Check URL
+//		
+//		Assert.assertEquals(driver.getCurrentUrl(), "http://live.guru99.com/index.php/customer/account/create/");
+//		System.out.println("CHECK URL SUCCESSED!!!!!!!!!!!");
+//
+//		
+//	}
+	
+	public void TC_02_HandleCheckbox() throws InterruptedException {
+		//get page
+		driver.get("http://demos.telerik.com/kendo-ui/styling/checkboxes");
+		
+		//Click checkbox
+		driver.findElement(By.xpath("//label[contains(text(),'Dual-zone air conditioning')]")).click();
+		
+		//Check checkbox is selected
+		Assert.assertTrue(driver.findElement(By.xpath("//label[contains(text(),'Dual-zone air conditioning')]/preceding-sibling::input")).isSelected());
+		
+		System.out.println("CHECBOX IS SELECTED!!!!!");
+		
+		Thread.sleep(300);
+		
+		driver.findElement(By.xpath("//label[contains(text(),'Dual-zone air conditioning')]")).click();
+		
+		Assert.assertFalse(driver.findElement(By.xpath("//label[contains(text(),'Dual-zone air conditioning')]/preceding-sibling::input")).isSelected());
+		
+		System.out.println("CHECBOX IS NOT SELECTED!!!!!");
+		
+		//
+		
+		
 		
 	}
 	
-	
 		
-		
+	public void clickElementByJavascript(WebDriver driver, WebElement element) {
+		JavascriptExecutor je = (JavascriptExecutor) driver;
+		je.executeScript("arguments[0].click();", element);
+	}
 		
 	
 
