@@ -37,7 +37,7 @@ public class Topic_05_Button_Radio_Checkbox_Alert {
 
 	}
 
-	@Test
+//	@Test
 //	public void TC_01_HandleButton() {
 //		// get page
 //		driver.get("http://live.guru99.com/");
@@ -57,32 +57,63 @@ public class Topic_05_Button_Radio_Checkbox_Alert {
 //
 //		
 //	}
+//	@Test
+//	public void TC_02_HandleCheckbox() throws InterruptedException {
+//		//get page
+//		driver.get("http://demos.telerik.com/kendo-ui/styling/checkboxes");
+//		
+//		//Click checkbox
+//		driver.findElement(By.xpath("//label[contains(text(),'Dual-zone air conditioning')]")).click();
+//		
+//		//Check checkbox is selected
+//		Assert.assertTrue(driver.findElement(By.xpath("//label[contains(text(),'Dual-zone air conditioning')]/preceding-sibling::input")).isSelected());
+//		
+//		System.out.println("CHECBOX IS SELECTED!!!!!");
+//		
+//		Thread.sleep(300);
+//		
+//		driver.findElement(By.xpath("//label[contains(text(),'Dual-zone air conditioning')]")).click();
+//		
+//		Assert.assertFalse(driver.findElement(By.xpath("//label[contains(text(),'Dual-zone air conditioning')]/preceding-sibling::input")).isSelected());
+//		
+//		System.out.println("CHECBOX IS NOT SELECTED!!!!!");
+//		
+//		//
+//
+//		
+//	}
 	
-	public void TC_02_HandleCheckbox() throws InterruptedException {
+	@Test
+	public void TC_03_HandleCheckbox3() throws InterruptedException {
 		//get page
-		driver.get("http://demos.telerik.com/kendo-ui/styling/checkboxes");
+		driver.get("https://demos.telerik.com/kendo-ui/styling/radios");
+		//Way 2 JavascriptExecutor
+		//Selected
+		clickElementByJavascript(driver, driver.findElement(By.xpath("//label[contains(text(),'2.0 Petrol, 147kW')]/preceding-sibling::input")));
 		
-		//Click checkbox
-		driver.findElement(By.xpath("//label[contains(text(),'Dual-zone air conditioning')]")).click();
+		Assert.assertTrue(driver.findElement(By.xpath("//label[contains(text(),'2.0 Petrol, 147kW')]/preceding-sibling::input")).isSelected());
 		
-		//Check checkbox is selected
-		Assert.assertTrue(driver.findElement(By.xpath("//label[contains(text(),'Dual-zone air conditioning')]/preceding-sibling::input")).isSelected());
-		
-		System.out.println("CHECBOX IS SELECTED!!!!!");
 		
 		Thread.sleep(300);
 		
-		driver.findElement(By.xpath("//label[contains(text(),'Dual-zone air conditioning')]")).click();
+		//unselected
+		if(driver.findElement(By.xpath("//label[contains(text(),'2.0 Petrol, 147kW')]/preceding-sibling::input")).isSelected())	
+		{
+		clickElementByJavascript(driver, driver.findElement(By.xpath("//label[contains(text(),'2.0 Petrol, 147kW')]/preceding-sibling::input")));
+		Assert.assertTrue(driver.findElement(By.xpath("//label[contains(text(),'2.0 Petrol, 147kW')]/preceding-sibling::input")).isSelected());
+		System.out.println("RADIO BUTTON IS SELECTED!!!!");
+		}
+		else
 		
-		Assert.assertFalse(driver.findElement(By.xpath("//label[contains(text(),'Dual-zone air conditioning')]/preceding-sibling::input")).isSelected());
+//		Assert.assertFalse(driver.findElement(By.xpath("//label[contains(text(),'2.0 Petrol, 147kW')]/preceding-sibling::input")).isSelected());
+		System.out.println("RADIO BUTTON IS UNSELECTED!!!!");
 		
-		System.out.println("CHECBOX IS NOT SELECTED!!!!!");
-		
-		//
-		
-		
-		
+	
 	}
+	
+	
+	
+	
 	
 		
 	public void clickElementByJavascript(WebDriver driver, WebElement element) {
