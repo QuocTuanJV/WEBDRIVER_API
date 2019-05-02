@@ -6,6 +6,7 @@ import org.testng.annotations.BeforeClass;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -59,6 +60,35 @@ public class Topic_00_Test_Xpath {
 		
 		System.out.println("WASHINGTON IS CHOSED");
 
+		
+	}
+	
+	@Test
+	public void TC_05_Alert() {
+		driver.get("https://daominhdam.github.io/basic-form/index.html");
+		By resultMessage = By.xpath("//p[@id = 'result']");
+		
+		// click to Alert
+		driver.findElement(By.xpath("//button[contains(text(),'Click for JS Alert')]")).click();
+		
+		Alert alert = driver.switchTo().alert();
+		
+		//Get Alert Message
+		String alertMessage = alert.getText();
+		
+		//Verify Alert Message
+		Assert.assertEquals(alertMessage, "I am a JS Alert");
+		
+		//Click OK on Alert popup
+		alert.accept();
+		
+		//Verify Result Message is displayed
+//		Assert.assertTrue(driver.findElement(resultMessage).isDisplayed());
+		
+		Assert.assertTrue(driver.findElement(resultMessage).getText().equals("You clicked an alert successfully"));
+		
+		
+		
 		
 	}
 	
