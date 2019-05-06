@@ -171,34 +171,45 @@ public class Topic_05_Button_Radio_Checkbox_Alert {
 //		
 //	}
 	
+//	@Test
+//	public void TC_07_Alert_Entered() throws InterruptedException {
+//		driver.get("https://daominhdam.github.io/basic-form/index.html");
+//		By resultMessage = By.xpath("//p[@id = 'result']");
+//		String nameSendkey = "Luong Quoc Tuan";
+//		// click to Alert
+//		driver.findElement(By.xpath(" //button[contains(text(),'Click for JS Prompt')]")).click();
+//		
+//		Thread.sleep(3000);
+//		
+//		Alert alert = driver.switchTo().alert();
+//		
+//		//Get Alert Message
+//		String alertMessage = alert.getText();
+//		
+//		//Verify Alert Message
+//		Assert.assertEquals(alertMessage, "I am a JS prompt");
+//		
+//		//Entered Key
+//		alert.sendKeys(nameSendkey);
+//		
+//		Thread.sleep(3000);
+//		
+//		alert.accept();
+//
+//		Assert.assertTrue(driver.findElement(resultMessage).getText().equals("You entered: "+ nameSendkey));
+//		
+//
+//	}
+	
 	@Test
-	public void TC_07_Alert_Entered() throws InterruptedException {
-		driver.get("https://daominhdam.github.io/basic-form/index.html");
-		By resultMessage = By.xpath("//p[@id = 'result']");
-		String nameSendkey = "Luong Quoc Tuan";
-		// click to Alert
-		driver.findElement(By.xpath(" //button[contains(text(),'Click for JS Prompt')]")).click();
+	public void TC_08_Authencation() {
+		driver.get("https://admin:admin@the-internet.herokuapp.com/basic_auth");
 		
-		Thread.sleep(3000);
+		//verify page
+		Assert.assertTrue(driver.findElement(By.xpath("//p[contains(text(),'Congratulations! You must have the proper credenti')]")).isDisplayed());
+		System.out.println("Verify page success");
 		
-		Alert alert = driver.switchTo().alert();
 		
-		//Get Alert Message
-		String alertMessage = alert.getText();
-		
-		//Verify Alert Message
-		Assert.assertEquals(alertMessage, "I am a JS prompt");
-		
-		//Entered Key
-		alert.sendKeys(nameSendkey);
-		
-		Thread.sleep(3000);
-		
-		alert.accept();
-
-		Assert.assertTrue(driver.findElement(resultMessage).getText().equals("You entered: "+ nameSendkey));
-		
-
 	}
 	
 	
