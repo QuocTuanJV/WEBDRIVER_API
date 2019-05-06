@@ -142,42 +142,42 @@ public class Topic_05_Button_Radio_Checkbox_Alert {
 //		
 //	}
 	
-	@Test
-	public void TC_06_Alert_Cancel() throws InterruptedException {
-		driver.get("https://daominhdam.github.io/basic-form/index.html");
-		By resultMessage = By.xpath("//p[@id = 'result']");
-		
-		// click to Alert
-		driver.findElement(By.xpath("//button[contains(text(),'Click for JS Confirm')]")).click();
-		
-		Thread.sleep(3000);
-		
-		Alert alert = driver.switchTo().alert();
-		
-		//Get Alert Message
-		String alertMessage = alert.getText();
-		
-		//Verify Alert Message
-		Assert.assertEquals(alertMessage, "I am a JS Confirm");
-		
-		//Click OK on Alert popup
-		alert.dismiss();
-		
-		//Verify Result Message is displayed
-//		Assert.assertTrue(driver.findElement(resultMessage).isDisplayed());
-		
-		Assert.assertTrue(driver.findElement(resultMessage).getText().equals("You clicked: Cancel"));
-			
-		
-	}
+//	@Test
+//	public void TC_06_Alert_Cancel() throws InterruptedException {
+//		driver.get("https://daominhdam.github.io/basic-form/index.html");
+//		By resultMessage = By.xpath("//p[@id = 'result']");
+//		
+//		// click to Alert
+//		driver.findElement(By.xpath("//button[contains(text(),'Click for JS Confirm')]")).click();
+//		
+//		Thread.sleep(3000);
+//		
+//		Alert alert = driver.switchTo().alert();
+//		
+//		//Get Alert Message
+//		String alertMessage = alert.getText();
+//		
+//		//Verify Alert Message
+//		Assert.assertEquals(alertMessage, "I am a JS Confirm");
+//		
+//		//Click OK on Alert popup
+//		alert.dismiss();
+//		
+//		//Verify Result Message is displayed
+////		Assert.assertTrue(driver.findElement(resultMessage).isDisplayed());
+//		
+//		Assert.assertTrue(driver.findElement(resultMessage).getText().equals("You clicked: Cancel"));
+//			
+//		
+//	}
 	
 	@Test
 	public void TC_07_Alert_Entered() throws InterruptedException {
 		driver.get("https://daominhdam.github.io/basic-form/index.html");
 		By resultMessage = By.xpath("//p[@id = 'result']");
-		
+		String nameSendkey = "Luong Quoc Tuan";
 		// click to Alert
-		driver.findElement(By.xpath("//button[contains(text(),'Click for JS Confirm')]")).click();
+		driver.findElement(By.xpath(" //button[contains(text(),'Click for JS Prompt')]")).click();
 		
 		Thread.sleep(3000);
 		
@@ -187,20 +187,18 @@ public class Topic_05_Button_Radio_Checkbox_Alert {
 		String alertMessage = alert.getText();
 		
 		//Verify Alert Message
-		Assert.assertEquals(alertMessage, "I am a JS Confirm");
+		Assert.assertEquals(alertMessage, "I am a JS prompt");
 		
-		//Click OK on Alert popup
-		alert.dismiss();
+		//Entered Key
+		alert.sendKeys(nameSendkey);
 		
-		//Verify Result Message is displayed
-//		Assert.assertTrue(driver.findElement(resultMessage).isDisplayed());
+		Thread.sleep(3000);
 		
-		Assert.assertTrue(driver.findElement(resultMessage).getText().equals("You clicked: Cancel"));
+		alert.accept();
+
+		Assert.assertTrue(driver.findElement(resultMessage).getText().equals("You entered: "+ nameSendkey));
 		
-		
-		
-		
-		
+
 	}
 	
 	
