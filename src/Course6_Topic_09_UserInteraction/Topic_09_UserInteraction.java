@@ -131,12 +131,66 @@ public class Topic_09_UserInteraction {
 		
 		Assert.assertEquals(messageAlert, "The Button was double-clicked." );
 		
+	}
+	
+	@Test
+	public void TC_04_02_RightClick() {
 		
+		//Click and hold many item
+		driver.get("https://swisnl.github.io/jQuery-contextMenu/demo.html");
 		
+		WebElement rightClick = driver.findElement(By.xpath("//span[text()='right click me']"));
+		Actions action = new Actions(driver);
+		//right click on button
+		action.contextClick(rightClick).perform();
+	
+		
+		WebElement beforeQuit = driver.findElement(By.xpath("//li/span[text()='Quit']"));
+		
+		//Move mouse on quit element
+		action.moveToElement(beforeQuit).perform();
+		
+		//verify element is displayed
+		Assert.assertTrue(driver.findElement(By.xpath("//li[contains(@class,'hover') and contains(@class,'visible')]/span[text()='Quit']")).isDisplayed());
+		System.out.println("VERIFY ITEM SUCCESS");
+		
+		//Click left mouse on hover element
+		
+		action.click().perform();
+		
+		Alert arlert = driver.switchTo().alert();
+		
+		String messageAlert = arlert.getText();
+		
+		Assert.assertEquals(messageAlert, "clicked: quit" );
+		
+		arlert.accept();
 		
 	}
 
+	@Test
+	public void TC_05_DragAndDrop() {// Drag and Drop Kendo-ui
+		
+		//Click and hold many item
+		driver.get("https://demos.telerik.com/kendo-ui/dragdrop/index");
+		
+		WebElement sourceElement = driver.findElement(By.xpath("//div[@id='draggable']"));
+		WebElement targetElement = driver.findElement(By.xpath("//div[@id='droptarget']"));
+		
+		Actions action = new Actions(driver);
+		action.dragAndDrop(sourceElement, targetElement).perform();
+		
+		Assert.assertTrue(driver.findElement(By.xpath("//div[text()='You did great!']")).isDisplayed());
+		
+		System.out.println("Drag sucess");
+		
+
+		
+	}
+	
+
 	@AfterClass
+
 	public void afterClass() {
 	}
 
