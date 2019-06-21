@@ -10,6 +10,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 
@@ -19,57 +20,70 @@ public class Test_Topic12_JavaScriptExecutor2 {
 
 	@BeforeClass
 	public void beforeClass() {
-		System.setProperty("webdriver.chrome.driver", ".\\lib\\chromedriver.exe");
-		driver = new ChromeDriver();
+//		System.setProperty("webdriver.chrome.driver", ".\\lib\\chromedriver.exe");
+//		driver = new ChromeDriver();
+		
+		driver = new FirefoxDriver();
+		
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 
 	@Test
 	public void TC_01() {
-		driver.get("http://live.guru99.com/");
+		driver.get("http://live.guru99.com");
 		
-		//Get domain home page
-		String domainName = (String) executeForBrowser("return document.domain");
-		Assert.assertEquals(domainName, "live.guru99.com");
+		//click on My Account
+		WebElement myAccountLink = driver.findElement(By.xpath("//div[@class='footer']//a[text()='My Account']"));
 		
-		//Get Url home page
-		String homePageUrl = (String) executeForBrowser("return document.URL");
-		Assert.assertEquals(homePageUrl, "http://live.guru99.com/");
+		clickToElementByJS(myAccountLink);
+		System.out.println("click success 1");
 		
-		//Click element use JE
-		WebElement mobilePageLink = driver.findElement(By.xpath("//a[text()='Mobile']"));
-		clickToElementByJS(mobilePageLink);	
+		WebElement createACBtn = driver.findElement(By.xpath("//a[@title='Create an Account']"));
 		
-		//add  item by click 
-		WebElement samsumgGalaxyButton = driver.findElement(By.xpath("//a[text()='Samsung Galaxy']//parent::h2/following-sibling::div[@class='actions']/button"));
-		clickToElementByJS(samsumgGalaxyButton);
+		//click on Create an Account
+		clickToElementByJS(createACBtn);
+		System.out.println("click success 2");
 		
-//		String messageAdd = driver.findElement(By.xpath("//span[text()='Samsung Galaxy was added to your shopping cart.']")).getText();
-//		Assert.assertEquals(messageAdd, "Samsung Galaxy was added to your shopping cart.");
-		String messageAdd = (String) executeForBrowser("return document.documentElement.innerText");
-		Assert.assertTrue(messageAdd.contains("Samsung Galaxy was added to your shopping cart."));
 		
-		//Click on Privacy Policy
-		WebElement privacyLink = driver.findElement(By.xpath("//a[text()='Privacy Policy']"));
-		clickToElementByJS(privacyLink);
+		WebElement firstNameTxt = driver.findElement(By.xpath("//input[@id='firstname']"));
+		WebElement lastNameTxt = driver.findElement(By.xpath("//input[@id='lastname']"));
+		WebElement emailTxt = driver.findElement(By.xpath("//input[@id='email_address']"));
+		WebElement passwordTxt = driver.findElement(By.xpath("//input[@id='password']"));
+		WebElement confirmpwTxt = driver.findElement(By.xpath("//input[@id='confirmation']"));
+		WebElement registerBtn = driver.findElement(By.xpath("//button[@title='Register']"));
 		
-		String privacyTitle = (String) executeForBrowser("return document.title");
-		Assert.assertEquals(privacyTitle, "Privacy Policy");
+			
+		//Fill data
+		sendkeyToElementByJS(firstNameTxt, "LUONG");
+		sendkeyToElementByJS(lastNameTxt, "TUAN");
 		
-		//Scroll bottom page
-		scrollToBottomPage();
+		String mail = "LUONGTUAN"+ getRandomDoubleBetweenRange(1, 1000) + "@gmail.com";
+		sendkeyToElementByJS(emailTxt, mail);
+		System.out.println(mail);
 		
-		//Verify data by one link
-		WebElement dataTable = driver.findElement(By.xpath("//th[text()='WISHLIST_CNT']/following-sibling::td"));
-		Assert.assertEquals(dataTable.getText(), "The number of items in your Wishlist.");
+		sendkeyToElementByJS(passwordTxt, "010892");
+		sendkeyToElementByJS(confirmpwTxt, "010892");
 		
-		//navigate to other URL
-		navigateToUrlByJS("http://demo.guru99.com/v4/");
-		Assert.assertEquals((String) executeForBrowser("return document.domain"),"demo.guru99.com" );
-
+		
+		
+		//click button register
+		clickToElementByJS(registerBtn);
+		
+		//VERIFY TEXT SCCESS REGISTER
+		String messageSuccess = (String) executeForBrowser("return document.documentElement.innerText");
+		
+		Assert.assertTrue(messageSuccess.contains("Thank you for registering with Main Website Store."));
+		System.out.println("VERIFY SUCCESS");
+		
+		//click Account
+//		clickToElementByJS(driver.findElement(By.xpath("//a[@class='skip-link skip-account skip-active']//span[text()='Account']")));
+		clickToElementByJS(driver.findElement(By.xpath("//span[text()='Account']")));
+		clickToElementByJS(driver.findElement(By.xpath("//a[text()='Log Out']")));
 		
 	}
+	
+	
 
 	@AfterClass
 	public void afterClass() {
@@ -113,7 +127,7 @@ public class Test_Topic12_JavaScriptExecutor2 {
 	public Object removeAttributeInDOM(WebElement element, String attribute) {
 		try {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
-			return js.executeScript("arguments[0].removeAttribute('value','" + attribute +"')",element);
+			return js.executeScript("arguments[0].removeAttribute('" + attribute +"');",element);
 		} catch (Exception e) {
 			e.getMessage();
 			return null;
@@ -138,6 +152,11 @@ public class Test_Topic12_JavaScriptExecutor2 {
 			e.getMessage();
 			return null;
 		}
+	}
+	
+	public static double getRandomDoubleBetweenRange(double min, double max){
+	    double x = (Math.random()+((max-min)+1))+min;
+	    return x;
 	}
 	
 	
