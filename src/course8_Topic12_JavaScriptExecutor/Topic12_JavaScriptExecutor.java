@@ -235,6 +235,16 @@ public class Topic12_JavaScriptExecutor {
 		}
 	}
 	
+	public Object isDisplayImageByJS(WebElement element) {
+		try {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			return js.executeScript("return arguments[0].complete && typeof arguments[0].naturalWidth != \"undefined\" && arguments[0].naturalWidth > 0",element);
+		} catch (Exception e) {
+			e.getMessage();
+			return null;
+		}
+	}
+	
 	public static double getRandomDoubleBetweenRange(double min, double max){
 	    double x = (Math.random()+((max-min)+1))+min;
 	    return x;

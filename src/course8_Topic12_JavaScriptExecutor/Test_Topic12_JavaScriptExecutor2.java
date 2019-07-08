@@ -29,7 +29,7 @@ public class Test_Topic12_JavaScriptExecutor2 {
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	}
 
-	@Test
+//	@Test
 	public void TC_01() {
 		driver.get("http://live.guru99.com");
 		
@@ -81,6 +81,18 @@ public class Test_Topic12_JavaScriptExecutor2 {
 		clickToElementByJS(driver.findElement(By.xpath("//span[text()='Account']")));
 		clickToElementByJS(driver.findElement(By.xpath("//a[text()='Log Out']")));
 		
+	}
+	
+	@Test
+	public void TC_02_Check_Display_Image() {
+		driver.get("https://www.w3schools.com/html/tryit.asp?filename=tryhtml_images_trulli");
+		
+		driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@id='iframeResult']")));
+		WebElement element = driver.findElement(By.xpath("//img[@src='pic_trulli.jpg']"));
+//		System.out.println(element.getAttribute("alt"));
+		Assert.assertTrue((boolean)isDisplayImageByJS(element));
+		
+		System.out.println("Image is Display");
 	}
 	
 	
@@ -148,6 +160,16 @@ public class Test_Topic12_JavaScriptExecutor2 {
 		try {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			return js.executeScript("window.location = ' "+ url + "'");
+		} catch (Exception e) {
+			e.getMessage();
+			return null;
+		}
+	}
+	
+	public Object isDisplayImageByJS(WebElement element) {
+		try {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			return js.executeScript("return arguments[0].complete && typeof arguments[0].naturalWidth != \"undefined\" && arguments[0].naturalWidth > 0",element);
 		} catch (Exception e) {
 			e.getMessage();
 			return null;
