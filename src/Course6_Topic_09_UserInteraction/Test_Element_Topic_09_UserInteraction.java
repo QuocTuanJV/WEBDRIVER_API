@@ -21,7 +21,8 @@ public class Test_Element_Topic_09_UserInteraction {
 
 	@BeforeClass
 	public void beforeClass() {
-		System.setProperty("webdriver.chrome.driver", ".\\lib\\chromedriver.exe");
+//		set path to geckodriver with firefox >= 48
+//		System.setProperty("webdriver.chrome.driver", ".\\lib\\geckodriver.exe");
 		driver = new ChromeDriver();
 		
 		driver.manage().window().maximize();
